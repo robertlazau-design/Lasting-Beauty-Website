@@ -61,7 +61,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.7 }}
           className="mt-6 text-[11px] sm:text-xs uppercase tracking-[0.3em] text-[#6d6259] font-medium max-w-md"
         >
-          Premium braids, silk press & styling — booked effortlessly through GlossGenius
+          Natural hair specialist in Happy Valley, OR — braids, styling & deep conditioning for ages 5+
         </motion.p>
 
         {/* CTA Button */}

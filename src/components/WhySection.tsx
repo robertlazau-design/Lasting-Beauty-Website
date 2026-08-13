@@ -1,22 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, Award, Heart } from 'lucide-react';
+import { Users, DollarSign, Heart } from 'lucide-react';
 
 const features = [
   {
-    icon: Sparkles,
-    title: 'TikTok Approved',
-    description: 'Join thousands who discovered their perfect style through our viral looks and tutorials.',
+    icon: Users,
+    title: 'All Hair Types Welcome',
+    description: 'Ages 5 and up, all hair textures. Whether natural, relaxed, or straight — you\'re welcome in the chair.',
   },
   {
-    icon: Award,
-    title: 'Premium Products',
-    description: 'We only use salon-grade, professional products to ensure lasting results every time.',
+    icon: DollarSign,
+    title: 'Transparent Pricing',
+    description: 'Same pricing for kids and adults. No hidden fees, no surprises — just straightforward service.',
   },
   {
     icon: Heart,
-    title: 'Expert Stylists',
-    description: 'Years of expertise in braids, silk press, and protective styling for all hair types.',
+    title: 'Natural Hair Specialist',
+    description: 'Years of expertise in braids, cornrows, and protective styling with a focus on hair health and deep conditioning.',
   },
 ];
 

@@ -21,6 +21,7 @@ export function Navbar() {
   const navLinks = [
     { label: 'Services', target: 'services' },
     { label: 'Book Now', target: 'services' },
+    { label: 'Policies', target: 'info-section' },
     { label: 'About', target: 'why-section' },
     { label: 'Contact', target: 'footer' },
   ];
@@ -44,7 +45,7 @@ export function Navbar() {
           }`}
         >
           <div className="bg-[#332f2c] text-[#d2c7ba] text-[10px] py-2 text-center tracking-[0.15em] uppercase font-medium">
-            Premium Hair Services — Book via GlossGenius
+            Natural Hair Braiding & Deep Conditioning — Happy Valley, OR
           </div>
         </div>
 

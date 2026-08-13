@@ -19,7 +19,7 @@ export function Footer() {
               </span>
             </div>
             <p className="text-sm leading-relaxed text-[#a3968e] font-light mb-6">
-              Premium braids, silk press, and protective styling — making every client feel confident and beautiful.
+              Specializing in braids, protective styles, and deep conditioning treatments — serving ages 5 and up in Happy Valley, OR.
             </p>
             {/* Social links */}
             <div className="flex gap-4">
@@ -60,6 +60,8 @@ export function Footer() {
               {[
                 { label: 'Our Services', target: 'services' },
                 { label: 'Book Appointment', target: 'services' },
+                { label: 'Requirements', target: 'info-section' },
+                { label: 'Cancellation Policy', target: 'info-section' },
                 { label: 'About Us', target: 'why-section' },
               ].map((link) => (
                 <li key={link.label}>

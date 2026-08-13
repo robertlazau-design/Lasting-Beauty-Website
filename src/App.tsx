@@ -1,6 +1,7 @@
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ServiceMatcher } from './components/ServiceMatcher';
+import { InfoSection } from './components/InfoSection';
 import { WhySection } from './components/WhySection';
 import { Footer } from './components/Footer';
 
@@ -34,6 +35,9 @@ export default function App() {
           <ServiceMatcher />
         </div>
       </section>
+
+      {/* Info Section — Requirements, FAQ, Hours, Cancellation */}
+      <InfoSection />
 
       {/* Why Section */}
       <WhySection />
