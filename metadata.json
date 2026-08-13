@@ -1,0 +1,8 @@
+{
+  "name": "Lasting Beauty Matcher",
+  "description": "Mobile-first booking funnel for Lasting Beauty salon.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
