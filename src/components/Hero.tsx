@@ -40,18 +40,18 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[0.08em] text-[#332f2c] leading-none mb-2"
+          className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-[0.1em] text-[#332f2c] leading-none mb-1"
         >
-          BEAUTY THAT
+          BRAIDED
         </motion.h1>
 
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="block font-script text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-[#8c7768] -mt-3 rotate-[-2deg]"
+          className="block font-script text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#8c7768] -mt-2 sm:-mt-4 rotate-[-2deg] tracking-wide"
         >
-          Lasts
+          for Lasting Beauty
         </motion.span>
 
         {/* Subtitle */}
