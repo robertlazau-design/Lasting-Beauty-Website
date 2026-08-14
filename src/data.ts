@@ -24,8 +24,55 @@ export const services: ServiceCategory[] = [
     name: "Braids & Cornrows",
     styles: [
       {
+        id: "knotless",
+        name: "Knotless Box Braids",
+        variations: [
+          {
+            id: "knotless-smedium",
+            name: "Smedium - Mid Back",
+            price: 260,
+            duration: "5h 30m",
+            bookingUrl: "https://lastingbeauty.glossgenius.com/services/knotless-smedium"
+          },
+          {
+            id: "knotless-medium",
+            name: "Medium - Waist Length",
+            price: 230,
+            duration: "4h 30m",
+            bookingUrl: "https://lastingbeauty.glossgenius.com/services/knotless-medium"
+          },
+          {
+            id: "knotless-large",
+            name: "Large - Waist Length",
+            price: 190,
+            duration: "3h 30m",
+            bookingUrl: "https://lastingbeauty.glossgenius.com/services/knotless-large"
+          }
+        ]
+      },
+      {
+        id: "boho",
+        name: "Boho Knotless",
+        variations: [
+          {
+            id: "boho-s-mid",
+            name: "Small - Mid Back",
+            price: 280,
+            duration: "6h",
+            bookingUrl: "https://lastingbeauty.glossgenius.com/services/boho-sm"
+          },
+          {
+            id: "boho-m-waist",
+            name: "Medium - Waist Length",
+            price: 240,
+            duration: "5h",
+            bookingUrl: "https://lastingbeauty.glossgenius.com/services/boho-mw"
+          }
+        ]
+      },
+      {
         id: "straight-back",
-        name: "Straight Back",
+        name: "Straight Back Cornrows",
         variations: [
           {
             id: "sb-4",
@@ -56,26 +103,6 @@ export const services: ServiceCategory[] = [
             bookingUrl: "https://lastingbeauty.glossgenius.com/services/straight-back-10"
           }
         ]
-      },
-      {
-        id: "boho",
-        name: "Boho Knotless",
-        variations: [
-          {
-            id: "boho-s-mid",
-            name: "Small - Mid Back",
-            price: 280,
-            duration: "6h",
-            bookingUrl: "https://lastingbeauty.glossgenius.com/services/boho-sm"
-          },
-          {
-            id: "boho-m-waist",
-            name: "Medium - Waist Length",
-            price: 240,
-            duration: "5h",
-            bookingUrl: "https://lastingbeauty.glossgenius.com/services/boho-mw"
-          }
-        ]
       }
     ]
   },
@@ -102,6 +129,19 @@ export const services: ServiceCategory[] = [
             bookingUrl: "https://lastingbeauty.glossgenius.com/services/sp-ext"
           }
         ]
+      },
+      {
+        id: "curl-transformation",
+        name: "Curl Transformation",
+        variations: [
+          {
+            id: "curl-def",
+            name: "Curl Definition & Hydration Treatment",
+            price: 95,
+            duration: "2h",
+            bookingUrl: "https://lastingbeauty.glossgenius.com/services/curl-transform"
+          }
+        ]
       }
     ]
   },
@@ -113,6 +153,13 @@ export const services: ServiceCategory[] = [
         id: "wash-treat",
         name: "Wash & Treatment",
         variations: [
+          {
+            id: "scalp-treatment",
+            name: "Scalp Detox & Treatment",
+            price: 65,
+            duration: "1h 15m",
+            bookingUrl: "https://lastingbeauty.glossgenius.com/services/scalp-treat"
+          },
           {
             id: "deep-condition",
             name: "Deep Conditioning + Trim",
@@ -139,6 +186,13 @@ export const services: ServiceCategory[] = [
             price: 80,
             duration: "2h",
             bookingUrl: "https://lastingbeauty.glossgenius.com/services/mens-box"
+          },
+          {
+            id: "mens-two-strand",
+            name: "Two-Strand Twists",
+            price: 75,
+            duration: "1h 45m",
+            bookingUrl: "https://lastingbeauty.glossgenius.com/services/mens-twists"
           }
         ]
       }
