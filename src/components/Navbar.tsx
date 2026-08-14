@@ -22,6 +22,7 @@ export function Navbar() {
     { label: 'Services', target: 'services' },
     { label: 'Book Now', target: 'services' },
     { label: 'Policies', target: 'info-section' },
+    { label: 'Reviews', target: 'reviews' },
     { label: 'About', target: 'why-section' },
     { label: 'Contact', target: 'footer' },
   ];
