@@ -440,14 +440,33 @@ export function InfoSection() {
         </div>
 
         {/* Bottom note */}
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           animate={isVisible ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-8 text-xs text-[#8c7768] tracking-wide font-medium"
+          className="text-center mt-10 text-xs text-[#8c7768] tracking-wide font-medium flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4"
         >
-          Questions? Reach out before booking — I'm happy to help ✨
-        </motion.p>
+          <span>Questions? Reach out before booking — I'm happy to help ✨</span>
+          <div className="flex items-center gap-3">
+            <a
+              href="https://www.instagram.com/braids_by_lastingbeauty/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#332f2c] underline decoration-[#8c7768] hover:text-[#8c7768] transition-colors"
+            >
+              DM on Instagram
+            </a>
+            <span>•</span>
+            <a
+              href="https://www.tiktok.com/@braids_by_lastingbeauty"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#332f2c] underline decoration-[#8c7768] hover:text-[#8c7768] transition-colors"
+            >
+              TikTok
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

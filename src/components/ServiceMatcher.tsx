@@ -434,13 +434,14 @@ export function ServiceMatcher({ targetSelection, onClearTargetSelection }: Serv
                       <span className="hidden sm:inline text-[#d2c7ba]">•</span>
 
                       <a
-                        href="https://www.instagram.com"
+                        href="https://www.instagram.com/braids_by_lastingbeauty/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 hover:text-[#332f2c] transition-colors"
+                        title="DM @braids_by_lastingbeauty on Instagram"
                       >
                         <MessageSquare className="w-3.5 h-3.5" />
-                        <span>Questions? DM on Instagram</span>
+                        <span>Questions? DM @braids_by_lastingbeauty</span>
                       </a>
                     </div>
                   </div>
