@@ -42,16 +42,16 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[0.08em] text-[#332f2c] leading-none mb-2"
         >
-          EXPERIENCE
+          BEAUTY THAT
         </motion.h1>
 
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="block font-script text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#8c7768] -mt-2 rotate-[-2deg]"
+          className="block font-script text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-[#8c7768] -mt-3 rotate-[-2deg]"
         >
-          The Art of Hair
+          Lasts
         </motion.span>
 
         {/* Subtitle */}
@@ -59,9 +59,9 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="mt-6 text-[11px] sm:text-xs uppercase tracking-[0.3em] text-[#6d6259] font-medium max-w-md"
+          className="mt-6 text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#6d6259] font-medium max-w-lg leading-relaxed"
         >
-          Natural hair specialist in Happy Valley, OR — braids, styling & deep conditioning for ages 5+
+          Precision braids, clean parts & healthy hair transformations in Happy Valley, OR — for ages 5+
         </motion.p>
 
         {/* CTA Button */}
