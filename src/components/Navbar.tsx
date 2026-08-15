@@ -1,6 +1,15 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+
+interface NavLink {
+  label: string;
+  /** scrollTo target id for same-page sections */
+  target?: string;
+  /** Route path for cross-page links */
+  href?: string;
+}
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -18,8 +27,9 @@ export function Navbar() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const navLinks = [
+  const navLinks: NavLink[] = [
     { label: 'Services', target: 'services' },
+    { label: 'Gallery', href: '/gallery' },
     { label: 'Book Now', target: 'services' },
     { label: 'Policies', target: 'info-section' },
     { label: 'Reviews', target: 'reviews' },
@@ -92,16 +102,27 @@ export function Navbar() {
 
             {/* Desktop nav links */}
             <div className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <button
-                  key={link.label}
-                  onClick={() => scrollTo(link.target)}
-                  className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#6d6259] hover:text-[#332f2c] transition-colors relative group"
-                >
-                  {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#8c7768] group-hover:w-full transition-all duration-300" />
-                </button>
-              ))}
+              {navLinks.map((link) =>
+                link.href ? (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#6d6259] hover:text-[#332f2c] transition-colors relative group"
+                  >
+                    {link.label}
+                    <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#8c7768] group-hover:w-full transition-all duration-300" />
+                  </Link>
+                ) : (
+                  <button
+                    key={link.label}
+                    onClick={() => scrollTo(link.target!)}
+                    className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#6d6259] hover:text-[#332f2c] transition-colors relative group"
+                  >
+                    {link.label}
+                    <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#8c7768] group-hover:w-full transition-all duration-300" />
+                  </button>
+                )
+              )}
             </div>
 
             {/* Mobile hamburger */}
@@ -143,18 +164,35 @@ export function Navbar() {
                 </button>
               </div>
               <div className="flex flex-col px-6 py-8 gap-6 flex-1">
-                {navLinks.map((link, i) => (
-                  <motion.button
-                    key={link.label}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                    onClick={() => scrollTo(link.target)}
-                    className="text-left text-sm uppercase tracking-[0.2em] font-semibold text-[#6d6259] hover:text-[#332f2c] transition-colors py-2 border-b border-[#e5dfd6]/60"
-                  >
-                    {link.label}
-                  </motion.button>
-                ))}
+                {navLinks.map((link, i) =>
+                  link.href ? (
+                    <motion.div
+                      key={link.label}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      <Link
+                        to={link.href}
+                        onClick={() => setMobileOpen(false)}
+                        className="block text-left text-sm uppercase tracking-[0.2em] font-semibold text-[#6d6259] hover:text-[#332f2c] transition-colors py-2 border-b border-[#e5dfd6]/60"
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  ) : (
+                    <motion.button
+                      key={link.label}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      onClick={() => scrollTo(link.target!)}
+                      className="text-left text-sm uppercase tracking-[0.2em] font-semibold text-[#6d6259] hover:text-[#332f2c] transition-colors py-2 border-b border-[#e5dfd6]/60"
+                    >
+                      {link.label}
+                    </motion.button>
+                  )
+                )}
               </div>
               <div className="px-6 py-6 border-t border-[#e5dfd6] flex items-center justify-between">
                 <span className="text-[10px] uppercase tracking-[0.15em] text-[#8c7768] font-semibold">

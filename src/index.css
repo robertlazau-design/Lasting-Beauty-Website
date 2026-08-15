@@ -149,3 +149,13 @@ body {
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(229, 223, 214, 0.7);
 }
+
+/* ── Hide scrollbar utility ── */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

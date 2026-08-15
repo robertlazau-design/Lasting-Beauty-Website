@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { InAppBrowserBanner } from './components/InAppBrowserBanner';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -11,6 +12,22 @@ import { StickyBookingBar } from './components/StickyBookingBar';
 
 export default function App() {
   const [targetSelection, setTargetSelection] = useState<ServiceTargetSelection | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  /* Handle ?scrollTo=services from gallery "Book This Look" links */
+  useEffect(() => {
+    const scrollTarget = searchParams.get('scrollTo');
+    if (scrollTarget) {
+      // Small delay to ensure DOM is ready
+      const timer = setTimeout(() => {
+        const el = document.getElementById(scrollTarget);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Clean the URL
+        setSearchParams({}, { replace: true });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [searchParams, setSearchParams]);
 
   const handleSelectReviewService = (target: ServiceTargetSelection) => {
     setTargetSelection(target);

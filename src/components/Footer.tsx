@@ -104,6 +104,14 @@ export function Footer() {
               ))}
               <li>
                 <a
+                  href="/gallery"
+                  className="text-sm text-[#a3968e] hover:text-[#f5efe9] transition-colors font-light"
+                >
+                  Gallery
+                </a>
+              </li>
+              <li>
+                <a
                   href="https://lastingbeauty.glossgenius.com"
                   target="_blank"
                   rel="noopener noreferrer"
