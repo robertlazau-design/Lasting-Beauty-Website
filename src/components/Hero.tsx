@@ -17,12 +17,12 @@ export function Hero() {
         <img
           src={heroBg}
           alt="Lasting Beauty salon"
-          className="w-full h-full object-cover object-top"
+          className="w-full h-full object-cover object-center"
         />
-        {/* Overlay gradients */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#f5efe9]/90 via-[#f5efe9]/50 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#f5efe9] via-transparent to-[#f5efe9]/40" />
-        <div className="absolute inset-0 bg-[#f5efe9]/10" />
+        {/* Balanced symmetrical overlay gradients */}
+        <div className="absolute inset-0 bg-[#f5efe9]/45" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#f5efe9] via-transparent to-[#f5efe9]/60" />
+        <div className="absolute inset-0 bg-radial from-transparent via-[#f5efe9]/30 to-[#f5efe9]/70" />
       </div>
 
       {/* Hero content */}
