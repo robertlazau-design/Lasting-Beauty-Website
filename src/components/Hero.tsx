@@ -13,16 +13,16 @@ export function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background image */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         <img
           src={heroBg}
           alt="Lasting Beauty salon"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-[58%_25%] scale-110 sm:scale-115 -translate-x-[5%] sm:-translate-x-[7%]"
         />
-        {/* Balanced symmetrical overlay gradients */}
-        <div className="absolute inset-0 bg-[#f5efe9]/45" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#f5efe9] via-transparent to-[#f5efe9]/60" />
-        <div className="absolute inset-0 bg-radial from-transparent via-[#f5efe9]/30 to-[#f5efe9]/70" />
+        {/* Balanced overlay gradients */}
+        <div className="absolute inset-0 bg-[#f5efe9]/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#f5efe9] via-transparent to-[#f5efe9]/50" />
+        <div className="absolute inset-0 bg-radial from-transparent via-[#f5efe9]/20 to-[#f5efe9]/60" />
       </div>
 
       {/* Hero content */}
