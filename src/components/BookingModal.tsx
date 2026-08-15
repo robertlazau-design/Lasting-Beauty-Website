@@ -171,7 +171,7 @@ export function BookingModal({
                 <span>$25 deposit applied to service • Wash, condition & prep included</span>
               </div>
               <span className="text-[9px] uppercase tracking-wider text-[#8c7768] font-medium shrink-0">
-                Mesa / Happy Valley Salon
+                Happy Valley, OR • Suite 109
               </span>
             </div>
 

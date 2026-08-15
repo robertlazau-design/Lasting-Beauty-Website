@@ -398,7 +398,7 @@ export function ServiceMatcher({ targetSelection, onClearTargetSelection }: Serv
                         <div className="flex items-start gap-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#8c7768] mt-1.5 shrink-0" />
                           <p>
-                            <strong className="text-[#332f2c] font-semibold">Salon Studio Location:</strong> Mesa, AZ (Happy Valley, OR). Private suite address sent upon booking.
+                            <strong className="text-[#332f2c] font-semibold">Studio Location:</strong> 12930 SE 162nd Ave., Suite 109, Happy Valley, OR 97086.
                           </p>
                         </div>
                       </div>

@@ -1,3 +1,5 @@
+import { MapPin, ExternalLink } from 'lucide-react';
+
 export function Footer() {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -18,9 +20,29 @@ export function Footer() {
                 LASTING <span className="font-script text-3xl tracking-normal">Beauty</span>
               </span>
             </div>
-            <p className="text-sm leading-relaxed text-[#a3968e] font-light mb-6">
+            <p className="text-sm leading-relaxed text-[#a3968e] font-light mb-4">
               Specializing in braids, protective styles, and deep conditioning treatments — serving ages 5 and up in Happy Valley, OR.
             </p>
+
+            {/* Studio Address */}
+            <div className="mb-6 flex items-start gap-2 text-xs text-[#d2c7ba] bg-[#38312d] p-3 rounded-xl border border-[#4a413b]">
+              <MapPin className="w-4 h-4 text-[#8c7768] shrink-0 mt-0.5" />
+              <div className="flex flex-col">
+                <span className="font-semibold text-white">Studio Location</span>
+                <span>12930 SE 162nd Ave., Suite 109</span>
+                <span>Happy Valley, OR 97086</span>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=12930+SE+162nd+Ave%2C+Suite+109%2C+Happy+Valley%2C+OR+97086"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1.5 inline-flex items-center gap-1 text-[11px] text-[#8c7768] hover:text-[#f5efe9] font-medium transition-colors"
+                >
+                  <span>Get Directions</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+            </div>
+
             {/* Social links */}
             <div className="flex flex-col gap-3">
               <div className="flex gap-3">

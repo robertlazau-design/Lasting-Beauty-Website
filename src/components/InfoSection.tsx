@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronDown, Clock, MapPin, AlertCircle, HelpCircle, FileText, CheckCircle } from 'lucide-react';
+import { ChevronDown, Clock, MapPin, AlertCircle, HelpCircle, FileText, CheckCircle, ExternalLink } from 'lucide-react';
 
 /* ── Accordion Item ── */
 function AccordionItem({
@@ -343,20 +343,34 @@ export function InfoSection() {
             transition={{ duration: 0.5, delay: 0.5 }}
             className="bg-white/60 backdrop-blur-sm border border-[#e5dfd6] rounded-2xl px-6 sm:px-8 py-6 sm:py-7"
           >
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 bg-[#f5efe9] rounded-full flex items-center justify-center border border-[#e5dfd6] shrink-0">
-                <Clock className="w-4.5 h-4.5 text-[#8c7768]" />
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-5 border-b border-[#e5dfd6]/70">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#f5efe9] rounded-full flex items-center justify-center border border-[#e5dfd6] shrink-0">
+                  <Clock className="w-4.5 h-4.5 text-[#8c7768]" />
+                </div>
+                <div>
+                  <span className="font-serif text-lg sm:text-xl text-[#332f2c] tracking-wide block">
+                    Hours & Location
+                  </span>
+                  <div className="flex items-start gap-1 text-xs text-[#8c7768] font-medium mt-0.5">
+                    <MapPin className="w-3.5 h-3.5 mt-0.5 shrink-0" />
+                    <span>12930 SE 162nd Ave., Suite 109, Happy Valley, OR 97086</span>
+                  </div>
+                </div>
               </div>
-              <div>
-                <span className="font-serif text-lg sm:text-xl text-[#332f2c] tracking-wide block">
-                  Hours & Location
-                </span>
-                <span className="flex items-center gap-1.5 text-xs text-[#8c7768] font-medium mt-0.5">
-                  <MapPin className="w-3 h-3" />
-                  Happy Valley, OR
-                </span>
-              </div>
+
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=12930+SE+162nd+Ave%2C+Suite+109%2C+Happy+Valley%2C+OR+97086"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-[#8c7768] hover:bg-[#726155] text-white text-[11px] font-semibold uppercase tracking-wider rounded-full transition-all duration-300 shadow-sm active:scale-95 shrink-0 self-start sm:self-auto"
+                title="Open in Google Maps"
+              >
+                <span>Get Directions</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
             </div>
+
             <div className="grid grid-cols-1 gap-0">
               {businessHours.map((item) => {
                 const isToday = item.day === today;

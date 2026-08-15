@@ -69,7 +69,7 @@ export function StickyBookingBar({ onOpenBooking }: StickyBookingBarProps) {
                   Accepting Appointments
                 </p>
                 <p className="text-[9px] text-[#c5bcb1] tracking-wide truncate">
-                  Happy Valley / Mesa • Ages 5+
+                  Happy Valley, OR (Suite 109) • Ages 5+
                 </p>
               </div>
             </div>
