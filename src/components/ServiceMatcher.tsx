@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence, type PanInfo } from 'motion/react';
 import { ChevronRight, ArrowLeft, Clock, DollarSign, Sparkles, RotateCcw, Copy, Check, ShieldCheck, MapPin, MessageSquare, Info } from 'lucide-react';
 import { services, ServiceCategory, ServiceStyle, ServiceVariation } from '../data';
 import { BookingModal } from './BookingModal';
@@ -196,7 +196,20 @@ export function ServiceMatcher({ targetSelection, onClearTargetSelection }: Serv
             )}
           </div>
 
-          <div className="min-h-[340px] relative">
+          <motion.div
+            className="min-h-[340px] relative touch-pan-y"
+            drag={step > 1 ? "x" : false}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onDragEnd={(_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+              // Swipe right to go back
+              if (step > 1 && (info.offset.x > 80 || info.velocity.x > 400)) {
+                handleBack();
+              }
+            }}
+            whileDrag={step > 1 ? { scale: 0.98, opacity: 0.9 } : undefined}
+            key={`drag-container-${step}`}
+          >
             <AnimatePresence mode="wait">
               {/* STEP 1: CATEGORY */}
               {step === 1 && (
@@ -448,7 +461,7 @@ export function ServiceMatcher({ targetSelection, onClearTargetSelection }: Serv
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
+          </motion.div>
         </div>
       </div>
 

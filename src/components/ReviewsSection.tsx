@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, type PanInfo } from 'motion/react';
 import { ChevronLeft, ChevronRight, Star, Quote, ArrowRight, Sparkles } from 'lucide-react';
 import { ServiceTargetSelection } from './ServiceMatcher';
 
@@ -128,8 +128,12 @@ function Stars({ count }: { count: number }) {
 }
 
 /* ════════════════════════════════════════════
-   REVIEWS CAROUSEL WITH SERVICE DEEP-LINKS
+   REVIEWS CAROUSEL WITH TOUCH SWIPE & DEEP-LINKS
    ════════════════════════════════════════════ */
+
+/* Swipe thresholds */
+const SWIPE_THRESHOLD = 50;   // px drag distance
+const SWIPE_VELOCITY = 300;   // px/s velocity
 
 interface ReviewsSectionProps {
   onSelectService?: (target: ServiceTargetSelection) => void;
@@ -168,7 +172,7 @@ export function ReviewsSection({ onSelectService }: ReviewsSectionProps) {
   const next = useCallback(() => goTo(current + 1, 1), [current, goTo]);
   const prev = useCallback(() => goTo(current - 1, -1), [current, goTo]);
 
-  // Auto-advance every 6.5 seconds
+  // Auto-advance every 6.5 seconds (paused on hover or touch)
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(next, 6500);
@@ -195,10 +199,26 @@ export function ReviewsSection({ onSelectService }: ReviewsSectionProps) {
     }
   };
 
+  /* ── Swipe / Drag handler ── */
+  const handleDragEnd = useCallback(
+    (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+      const { offset, velocity } = info;
+      const swipedLeft = offset.x < -SWIPE_THRESHOLD || velocity.x < -SWIPE_VELOCITY;
+      const swipedRight = offset.x > SWIPE_THRESHOLD || velocity.x > SWIPE_VELOCITY;
+
+      if (swipedLeft) {
+        next();
+      } else if (swipedRight) {
+        prev();
+      }
+    },
+    [next, prev]
+  );
+
   // Slide variants
   const variants = {
     enter: (d: number) => ({
-      x: d > 0 ? 60 : -60,
+      x: d > 0 ? 80 : -80,
       opacity: 0,
       scale: 0.96,
     }),
@@ -208,7 +228,7 @@ export function ReviewsSection({ onSelectService }: ReviewsSectionProps) {
       scale: 1,
     },
     exit: (d: number) => ({
-      x: d > 0 ? -60 : 60,
+      x: d > 0 ? -80 : 80,
       opacity: 0,
       scale: 0.96,
     }),
@@ -260,8 +280,24 @@ export function ReviewsSection({ onSelectService }: ReviewsSectionProps) {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* Review card */}
-          <div className="bg-white/70 backdrop-blur-md border border-[#e5dfd6] rounded-3xl p-7 sm:p-10 lg:p-12 min-h-[320px] flex flex-col items-center justify-center text-center relative overflow-hidden shadow-sm">
+          {/* Swipe hint — shown briefly on mobile */}
+          <motion.div
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 0 }}
+            transition={{ delay: 3, duration: 1 }}
+            className="absolute -bottom-1 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 text-[10px] text-[#8c7768] font-medium tracking-wider uppercase pointer-events-none sm:hidden"
+          >
+            <ChevronLeft className="w-3 h-3" />
+            <span>Swipe to browse</span>
+            <ChevronRight className="w-3 h-3" />
+          </motion.div>
+
+          {/* Review card with drag/swipe */}
+          <div
+            className="bg-white/70 backdrop-blur-md border border-[#e5dfd6] rounded-3xl p-7 sm:p-10 lg:p-12 min-h-[320px] flex flex-col items-center justify-center text-center relative overflow-hidden shadow-sm touch-pan-y"
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setTimeout(() => setIsPaused(false), 4000)}
+          >
             {/* Decorative quotes */}
             <Quote className="absolute top-6 left-6 w-10 h-10 text-[#e5dfd6] rotate-180 opacity-60 pointer-events-none" />
             <Quote className="absolute bottom-6 right-6 w-10 h-10 text-[#e5dfd6] opacity-60 pointer-events-none" />
@@ -275,7 +311,12 @@ export function ReviewsSection({ onSelectService }: ReviewsSectionProps) {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                className="flex flex-col items-center w-full"
+                className="flex flex-col items-center w-full cursor-grab active:cursor-grabbing select-none"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.15}
+                onDragEnd={handleDragEnd}
+                whileDrag={{ scale: 0.98 }}
               >
                 {/* Top service badge & rating */}
                 <div className="flex flex-col sm:flex-row items-center gap-3 mb-4">
@@ -292,7 +333,7 @@ export function ReviewsSection({ onSelectService }: ReviewsSectionProps) {
                 </div>
 
                 {/* Review text */}
-                <p className="mt-2 mb-8 text-base sm:text-lg text-[#332f2c] leading-relaxed font-light max-w-2xl whitespace-pre-line">
+                <p className="mt-2 mb-8 text-base sm:text-lg text-[#332f2c] leading-relaxed font-light max-w-2xl whitespace-pre-line pointer-events-none">
                   "{review.text}"
                 </p>
 
@@ -324,27 +365,27 @@ export function ReviewsSection({ onSelectService }: ReviewsSectionProps) {
             </AnimatePresence>
           </div>
 
-          {/* Navigation arrows */}
+          {/* Navigation arrows + dots */}
           <div className="flex items-center justify-center gap-4 mt-8">
             <button
               onClick={prev}
               aria-label="Previous review"
-              className="w-10 h-10 rounded-full border border-[#d2c7ba] flex items-center justify-center text-[#8c7768] hover:bg-[#8c7768] hover:text-white hover:border-[#8c7768] transition-all duration-300 active:scale-95"
+              className="w-11 h-11 rounded-full border border-[#d2c7ba] flex items-center justify-center text-[#8c7768] hover:bg-[#8c7768] hover:text-white hover:border-[#8c7768] transition-all duration-300 active:scale-90"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
 
-            {/* Dot indicators */}
-            <div className="flex items-center gap-1.5">
+            {/* Dot indicators — scrollable on mobile when many */}
+            <div className="flex items-center gap-1.5 max-w-[200px] sm:max-w-none overflow-x-auto scrollbar-hide px-1 py-1">
               {reviews.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => goTo(i, i > current ? 1 : -1)}
                   aria-label={`Go to review ${i + 1}`}
-                  className={`rounded-full transition-all duration-400 ${
+                  className={`rounded-full transition-all duration-400 shrink-0 ${
                     i === current
-                      ? 'w-6 h-2 bg-[#8c7768]'
-                      : 'w-2 h-2 bg-[#d2c7ba] hover:bg-[#b9ada2]'
+                      ? 'w-6 h-2.5 bg-[#8c7768]'
+                      : 'w-2.5 h-2.5 bg-[#d2c7ba] hover:bg-[#b9ada2]'
                   }`}
                 />
               ))}
@@ -353,7 +394,7 @@ export function ReviewsSection({ onSelectService }: ReviewsSectionProps) {
             <button
               onClick={next}
               aria-label="Next review"
-              className="w-10 h-10 rounded-full border border-[#d2c7ba] flex items-center justify-center text-[#8c7768] hover:bg-[#8c7768] hover:text-white hover:border-[#8c7768] transition-all duration-300 active:scale-95"
+              className="w-11 h-11 rounded-full border border-[#d2c7ba] flex items-center justify-center text-[#8c7768] hover:bg-[#8c7768] hover:text-white hover:border-[#8c7768] transition-all duration-300 active:scale-90"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -368,3 +409,4 @@ export function ReviewsSection({ onSelectService }: ReviewsSectionProps) {
     </section>
   );
 }
+
