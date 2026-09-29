@@ -422,7 +422,7 @@ export function ServiceMatcher({ targetSelection, onClearTargetSelection }: Serv
                       onClick={handleBookNow}
                       className="block w-full bg-[#8c7768] text-white font-medium tracking-[0.2em] text-xs py-4 sm:py-5 rounded-full hover:bg-[#726155] transition-all shadow-md hover:shadow-[0_4px_20px_rgba(140,119,104,0.35)] active:scale-95 duration-200 relative z-10 uppercase cursor-pointer"
                     >
-                      Book Now on GlossGenius
+                      Book Now — Choose Your Date
                     </button>
 
                     {/* Secondary Actions: Copy link & Consultation */}
