@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence, type PanInfo } from 'motion/react';
-import { ChevronRight, ArrowLeft, Clock, DollarSign, Sparkles, RotateCcw, Copy, Check, ShieldCheck, MapPin, MessageSquare, Info } from 'lucide-react';
+import { ChevronRight, ArrowLeft, Clock, DollarSign, Sparkles, RotateCcw, Copy, Check, ShieldCheck, MapPin, MessageSquare, Info, ArrowRight, ExternalLink } from 'lucide-react';
 import { services, ServiceCategory, ServiceStyle, ServiceVariation } from '../data';
 import { BookingModal } from './BookingModal';
 
@@ -22,6 +22,7 @@ export function ServiceMatcher({ targetSelection, onClearTargetSelection }: Serv
   const [selectedVariation, setSelectedVariation] = useState<ServiceVariation | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [hasOpenedGlossGenius, setHasOpenedGlossGenius] = useState(false);
 
   // Handle external selection (e.g. from Reviews section)
   useEffect(() => {
@@ -87,10 +88,12 @@ export function ServiceMatcher({ targetSelection, onClearTargetSelection }: Serv
 
   const handleSelectVariation = (variation: ServiceVariation) => {
     setSelectedVariation(variation);
+    setHasOpenedGlossGenius(false);
     setStep(4);
   };
 
   const handleBack = () => {
+    setHasOpenedGlossGenius(false);
     if (step === 2) {
       setSelectedCategory(null);
       setStep(1);
@@ -114,12 +117,18 @@ export function ServiceMatcher({ targetSelection, onClearTargetSelection }: Serv
     setSelectedCategory(null);
     setSelectedStyle(null);
     setSelectedVariation(null);
+    setHasOpenedGlossGenius(false);
     setStep(1);
     if (onClearTargetSelection) onClearTargetSelection();
   };
 
   const handleBookNow = () => {
-    setModalOpen(true);
+    if (selectedVariation?.bookingUrl) {
+      window.open(selectedVariation.bookingUrl, '_blank', 'noopener,noreferrer');
+      setHasOpenedGlossGenius(true);
+    } else {
+      setModalOpen(true);
+    }
   };
 
   const handleCopyLink = async () => {
@@ -417,16 +426,33 @@ export function ServiceMatcher({ targetSelection, onClearTargetSelection }: Serv
                       </div>
                     </div>
 
-                    {/* Primary CTA — opens inline modal */}
+                    {/* Primary CTA — Direct 1-Click Launch into GlossGenius */}
                     <button
                       onClick={handleBookNow}
-                      className="block w-full bg-[#8c7768] text-white font-medium tracking-[0.2em] text-xs py-4 sm:py-5 rounded-full hover:bg-[#726155] transition-all shadow-md hover:shadow-[0_4px_20px_rgba(140,119,104,0.35)] active:scale-95 duration-200 relative z-10 uppercase cursor-pointer"
+                      className="block w-full bg-[#8c7768] text-white font-medium tracking-[0.2em] text-xs py-4 sm:py-5 rounded-full hover:bg-[#726155] transition-all shadow-md hover:shadow-[0_4px_20px_rgba(140,119,104,0.35)] active:scale-95 duration-200 relative z-10 uppercase cursor-pointer flex items-center justify-center gap-2 group"
                     >
-                      Book Now — Choose Your Date
+                      <span>{hasOpenedGlossGenius ? 'Open GlossGenius Again' : 'Choose Date & Book on GlossGenius'}</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </button>
 
-                    {/* Secondary Actions: Copy link & Consultation */}
-                    <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4 text-[10px] text-[#8c7768] uppercase tracking-[0.15em] font-semibold relative z-10">
+                    {/* Status feedback after opening */}
+                    {hasOpenedGlossGenius && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="mt-3 p-3 bg-emerald-50/80 border border-emerald-200/80 rounded-2xl text-center relative z-10"
+                      >
+                        <p className="text-xs text-emerald-800 font-medium">
+                          ✓ GlossGenius opened in a new tab for <strong>{selectedVariation.name}</strong>
+                        </p>
+                        <p className="text-[10px] text-emerald-700 mt-0.5">
+                          Select your date and time to reserve your appointment.
+                        </p>
+                      </motion.div>
+                    )}
+
+                    {/* Secondary Actions: Copy link, Policies, Consultation */}
+                    <div className="mt-4 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-[10px] text-[#8c7768] uppercase tracking-[0.15em] font-semibold relative z-10">
                       <button
                         onClick={handleCopyLink}
                         className="inline-flex items-center gap-1.5 hover:text-[#332f2c] transition-colors"
@@ -439,9 +465,19 @@ export function ServiceMatcher({ targetSelection, onClearTargetSelection }: Serv
                         ) : (
                           <>
                             <Copy className="w-3.5 h-3.5" />
-                            <span>Copy Booking Link</span>
+                            <span>Copy Direct Link</span>
                           </>
                         )}
+                      </button>
+
+                      <span className="text-[#d2c7ba]">•</span>
+
+                      <button
+                        onClick={() => setModalOpen(true)}
+                        className="inline-flex items-center gap-1.5 hover:text-[#332f2c] transition-colors"
+                      >
+                        <Info className="w-3.5 h-3.5" />
+                        <span>Booking Overview</span>
                       </button>
 
                       <span className="hidden sm:inline text-[#d2c7ba]">•</span>
@@ -454,7 +490,7 @@ export function ServiceMatcher({ targetSelection, onClearTargetSelection }: Serv
                         title="DM @braids_by_lastingbeauty on Instagram"
                       >
                         <MessageSquare className="w-3.5 h-3.5" />
-                        <span>Questions? DM @braids_by_lastingbeauty</span>
+                        <span>Questions? DM Us</span>
                       </a>
                     </div>
                   </div>

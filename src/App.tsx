@@ -10,21 +10,64 @@ import { WhySection } from './components/WhySection';
 import { Footer } from './components/Footer';
 import { StickyBookingBar } from './components/StickyBookingBar';
 
+import { services } from './data';
+
 export default function App() {
   const [targetSelection, setTargetSelection] = useState<ServiceTargetSelection | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  /* Handle ?scrollTo=services from gallery "Book This Look" links */
+  /* Handle query parameters (?service=..., ?category=..., ?style=..., ?scrollTo=services) */
   useEffect(() => {
+    const serviceParam = searchParams.get('service');
+    const categoryParam = searchParams.get('category');
+    const styleParam = searchParams.get('style');
+    const variationParam = searchParams.get('variation');
     const scrollTarget = searchParams.get('scrollTo');
-    if (scrollTarget) {
-      // Small delay to ensure DOM is ready
+
+    let matchedTarget: ServiceTargetSelection | null = null;
+
+    if (serviceParam) {
+      // Find matching variation ID across all categories and styles
+      for (const cat of services) {
+        for (const sty of cat.styles) {
+          const foundVar = sty.variations.find((v) => v.id === serviceParam);
+          if (foundVar) {
+            matchedTarget = { categoryId: cat.id, styleId: sty.id, variationId: foundVar.id };
+            break;
+          }
+        }
+        if (matchedTarget) break;
+      }
+
+      // If not found by variation ID, check if it matches a style ID
+      if (!matchedTarget) {
+        for (const cat of services) {
+          const foundSty = cat.styles.find((s) => s.id === serviceParam);
+          if (foundSty) {
+            matchedTarget = { categoryId: cat.id, styleId: foundSty.id, variationId: foundSty.variations[0]?.id };
+            break;
+          }
+        }
+      }
+    } else if (categoryParam) {
+      matchedTarget = {
+        categoryId: categoryParam,
+        styleId: styleParam || undefined,
+        variationId: variationParam || undefined,
+      };
+    }
+
+    if (matchedTarget) {
+      setTargetSelection(matchedTarget);
+    }
+
+    if (scrollTarget || matchedTarget) {
+      const targetId = scrollTarget || 'services';
       const timer = setTimeout(() => {
-        const el = document.getElementById(scrollTarget);
+        const el = document.getElementById(targetId);
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Clean the URL
         setSearchParams({}, { replace: true });
-      }, 300);
+      }, 350);
       return () => clearTimeout(timer);
     }
   }, [searchParams, setSearchParams]);

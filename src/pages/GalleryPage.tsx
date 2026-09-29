@@ -16,6 +16,8 @@ export interface GalleryItem {
   styleTag: string;
   /** Aspect ratio hint for masonry — 'portrait' | 'landscape' | 'square' */
   aspect: 'portrait' | 'landscape' | 'square';
+  /** Deep link service variation ID */
+  serviceId?: string;
 }
 
 /* ── Placeholder gallery items (to be replaced with real content) ── */
@@ -24,17 +26,19 @@ const GALLERY_ITEMS: GalleryItem[] = [
     id: 'g1',
     type: 'photo',
     src: '/gallery/knotless-braids.jpg',
-    caption: 'Medium Knotless Box Braids',
-    styleTag: 'Knotless Braids',
+    caption: '6 Straight Back Cornrows',
+    styleTag: 'Straight Back',
     aspect: 'portrait',
+    serviceId: 'sb-6',
   },
   {
     id: 'g2',
     type: 'photo',
     src: '/gallery/boho-braids.jpg',
-    caption: 'Boho Knotless with Curly Ends',
-    styleTag: 'Boho Knotless',
+    caption: '6 Boho Cornrows with Curls',
+    styleTag: 'Boho Cornrows',
     aspect: 'portrait',
+    serviceId: 'boho-6',
   },
   {
     id: 'g3',
@@ -43,14 +47,16 @@ const GALLERY_ITEMS: GalleryItem[] = [
     caption: 'Classic Silk Press — Sleek & Shiny',
     styleTag: 'Silk Press',
     aspect: 'landscape',
+    serviceId: 'silk-press',
   },
   {
     id: 'g4',
     type: 'photo',
     src: '/gallery/cornrows.jpg',
-    caption: 'Straight Back Cornrows',
-    styleTag: 'Cornrows',
+    caption: '4 Straight Back Cornrows',
+    styleTag: 'Straight Back',
     aspect: 'portrait',
+    serviceId: 'sb-4',
   },
   {
     id: 'g5',
@@ -59,19 +65,21 @@ const GALLERY_ITEMS: GalleryItem[] = [
     caption: 'Curl Transformation — Defined & Hydrated',
     styleTag: 'Curl Transformation',
     aspect: 'portrait',
+    serviceId: 'curl-transformation',
   },
   {
     id: 'g6',
     type: 'photo',
     src: '/gallery/large-knotless.jpg',
-    caption: 'Large Knotless — Waist Length',
-    styleTag: 'Knotless Braids',
+    caption: '8 Boho Cornrows with Dimension',
+    styleTag: 'Boho Cornrows',
     aspect: 'portrait',
+    serviceId: 'boho-8',
   },
 ];
 
 /* ── Filter Tags ── */
-const FILTER_TAGS = ['All', 'Knotless Braids', 'Boho Knotless', 'Silk Press', 'Cornrows', 'Curl Transformation'];
+const FILTER_TAGS = ['All', 'Straight Back', 'Boho Cornrows', 'Silk Press', 'Curl Transformation'];
 
 /* ── Lightbox Modal ── */
 function Lightbox({
@@ -148,7 +156,7 @@ function Lightbox({
             </span>
           </div>
           <Link
-            to="/?scrollTo=services"
+            to={item.serviceId ? `/?service=${item.serviceId}&scrollTo=services` : '/?scrollTo=services'}
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#8c7768] hover:bg-[#726155] text-white text-[11px] font-semibold uppercase tracking-wider rounded-full transition-all duration-300 shadow-md active:scale-95 shrink-0"
           >
             <Calendar className="w-3.5 h-3.5" />
@@ -238,7 +246,7 @@ function GalleryCard({
 
           {/* Book CTA */}
           <Link
-            to="/?scrollTo=services"
+            to={item.serviceId ? `/?service=${item.serviceId}&scrollTo=services` : '/?scrollTo=services'}
             onClick={(e) => e.stopPropagation()}
             className="inline-flex items-center gap-1.5 self-start px-4 py-2 bg-white/95 hover:bg-white text-[#332f2c] text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider rounded-full transition-all duration-300 shadow-sm active:scale-95"
           >
