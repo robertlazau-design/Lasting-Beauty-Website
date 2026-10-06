@@ -1,3 +1,4 @@
+import { openBooking } from '../lib/openBooking';
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence, type PanInfo } from 'motion/react';
 import { ChevronRight, ArrowLeft, Clock, DollarSign, Sparkles, RotateCcw, Copy, Check, ShieldCheck, MapPin, MessageSquare, Info, ArrowRight, ExternalLink } from 'lucide-react';
@@ -124,7 +125,7 @@ export function ServiceMatcher({ targetSelection, onClearTargetSelection }: Serv
 
   const handleBookNow = () => {
     if (selectedVariation?.bookingUrl) {
-      window.open(selectedVariation.bookingUrl, '_blank', 'noopener,noreferrer');
+      openBooking(selectedVariation.bookingUrl);
       setHasOpenedGlossGenius(true);
     } else {
       setModalOpen(true);

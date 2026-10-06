@@ -112,7 +112,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://lastingbeauty.glossgenius.com"
+                  href="https://lastingbeauty11.glossgenius.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-[#a3968e] hover:text-[#f5efe9] transition-colors font-light"

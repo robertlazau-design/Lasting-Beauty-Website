@@ -1,3 +1,4 @@
+import { openBooking } from '../lib/openBooking';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
@@ -67,7 +68,7 @@ export function BookingModal({
   };
 
   const handleOpenBooking = () => {
-    window.open(bookingUrl, '_blank', 'noopener,noreferrer');
+    openBooking(bookingUrl);
     setHasOpened(true);
   };
 
