@@ -29,13 +29,6 @@ export const services: ServiceCategory[] = [
         name: "Straight Back Cornrows",
         variations: [
           {
-            id: "sb-2",
-            name: "2 Straight Back",
-            price: 95,
-            duration: "1h 15m",
-            bookingUrl: "https://lastingbeauty11.glossgenius.com/book?service_token=1000f-19361dab-3ceb-425d-a7a2-4510172d350c"
-          },
-          {
             id: "sb-4",
             name: "4 Straight Back",
             price: 150,
@@ -89,13 +82,6 @@ export const services: ServiceCategory[] = [
             price: 300,
             duration: "4h",
             bookingUrl: "https://lastingbeauty11.glossgenius.com/book?service_token=1000f-ef216efa-ea70-4876-8919-3b07e0c8c0bb"
-          },
-          {
-            id: "boho-pony",
-            name: "Boho Cornrows - Ponytail",
-            price: 375,
-            duration: "5h",
-            bookingUrl: "https://lastingbeauty11.glossgenius.com/book?service_token=1000f-055d0e8d-b7b6-41f4-a5d2-9691e44c143f"
           }
         ]
       },
@@ -228,13 +214,6 @@ export const services: ServiceCategory[] = [
             price: 225,
             duration: "3h",
             bookingUrl: "https://lastingbeauty11.glossgenius.com/book?service_token=1000f-f0851738-b70d-4feb-97a0-9068e01c770f"
-          },
-          {
-            id: "mens-box-large",
-            name: "Men's Large Box Braids",
-            price: 112,
-            duration: "1h 30m",
-            bookingUrl: "https://lastingbeauty11.glossgenius.com/book?service_token=1000f-8e52d48e-19fd-4349-9008-d0965f27a544"
           }
         ]
       },
